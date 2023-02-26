@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "presentty"
+version = "0.1.0"
+description = "Tiny presentation tool based on rich and markdown"
+authors = ["L3viathan <git@l3vi.de>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+rich = "^13.3.1"
+ipython = "*"
+
+[tool.poetry.dev-dependencies]
+ipdb = "^0.13.11"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
