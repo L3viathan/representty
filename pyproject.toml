@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "presentty"
+name = "representty"
 version = "0.1.0"
 description = "Tiny presentation tool based on rich and markdown"
 authors = ["L3viathan <git@l3vi.de>"]

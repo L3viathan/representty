@@ -1,6 +1,7 @@
 import os
 import sys
 
+import IPython
 from rich.markdown import Markdown
 from rich.console import Console
 
@@ -54,7 +55,7 @@ class Presentation:
         print(f"\x1b[1A\x1b[{position}G\x1b[1;46;30m{display}", end="", flush=True)
 
 if len(sys.argv) != 2:
-    print("Usage: [i]python -i presentty.py path/to/slides.md", file=sys.stderr)
+    print("Usage: name-of-tool path/to/slides.md", file=sys.stderr)
     os._exit(1)
 
 PRES = Presentation(sys.argv[1])
@@ -85,3 +86,5 @@ def d(presentation):
 @PRES.bind
 def q(presentation):
     os._exit(0)
+
+IPython.embed(colors="neutral")
