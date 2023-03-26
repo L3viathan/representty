@@ -13,6 +13,9 @@ ipython = "*"
 [tool.poetry.dev-dependencies]
 ipdb = "^0.13.11"
 
+[tool.poetry.scripts]
+rtty = 'representty:just_call_the_script'
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
