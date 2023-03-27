@@ -96,5 +96,5 @@ def q(presentation):
     os._exit(0)
 
 
-IPython.embed(colors="neutral")
+IPython.embed(colors="neutral", history_load_length=0)
 os._exit(0)  # prevent import from failing
