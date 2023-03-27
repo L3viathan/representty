@@ -1,4 +1,5 @@
 import os
+import re
 import sys
 
 import IPython
@@ -6,10 +7,20 @@ from rich.markdown import Markdown
 from rich.console import Console
 
 
+class ShowTheSlide:
+    def __init__(self, presentation, function):
+        self.presentation = presentation
+        self.fn = function
+
+    def __repr__(self):
+        if self.fn(self.presentation) is not False:
+            return repr(self.presentation)
+
+
 class Presentation:
     def __init__(self, filename):
         with open(filename) as file:
-            self.slides = file.read().split("====")
+            self.slides = re.split(r"====+", file.read())
         self._slide_no = 0
         self.console = Console()
 
@@ -23,11 +34,7 @@ class Presentation:
             self._slide_no = new_value
 
     def bind(presentation, fn):
-        class ShowTheSlide:
-            def __repr__(self):
-                if fn(presentation) is not False:
-                    return repr(presentation)
-        return ShowTheSlide()
+        return ShowTheSlide(presentation, fn)
 
     def __repr__(self):
         print("\r")
@@ -53,6 +60,7 @@ class Presentation:
         display = f" {self.slide_no} "
         position = self.console.width - len(display)
         print(f"\x1b[1A\x1b[{position}G\x1b[1;46;30m{display}", end="", flush=True)
+
 
 if len(sys.argv) != 2:
     print("Usage: rtty path/to/slides.md", file=sys.stderr)
@@ -87,4 +95,6 @@ def d(presentation):
 def q(presentation):
     os._exit(0)
 
+
 IPython.embed(colors="neutral")
+os._exit(0)  # prevent import from failing
