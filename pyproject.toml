@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "representty"
-version = "0.1.0"
+version = "0.1.1"
 description = "Tiny presentation tool based on rich and markdown"
 authors = ["L3viathan <git@l3vi.de>"]
 license = "MIT"
