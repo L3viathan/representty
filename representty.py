@@ -23,6 +23,7 @@ class Presentation:
             self.slides = re.split(r"====+", file.read())
         self._slide_no = 0
         self.console = Console()
+        self.slides_shown = set()
 
     @property
     def slide_no(self):
@@ -42,7 +43,8 @@ class Presentation:
         lines = []
         for line in slide.split("\n"):
             if line.strip().startswith("!!"):
-                os.system(line.strip()[2:])
+                if self.slide_no not in self.slides_shown:
+                    os.system(line.strip()[2:])
                 continue
             elif line.strip().startswith("//"):
                 continue
@@ -54,6 +56,7 @@ class Presentation:
 
         self.console.print(markdown)
         self.draw_slide_number()
+        self.slides_shown.add(self.slide_no)
         return ""
 
     def draw_slide_number(self):
