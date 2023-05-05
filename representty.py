@@ -50,6 +50,7 @@ class Presentation:
                 continue
             elif line.strip().startswith("!import "):
                 exec(line.strip("! \n"), globals())
+                continue
             lines.append(line)
         markdown = Markdown("\n".join(lines).strip())
         for token in markdown.parsed:
