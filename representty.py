@@ -47,7 +47,10 @@ class Presentation:
                     os.system(line.strip()[2:])
                 continue
             elif line.strip().startswith("//"):
-                continue
+                if "PRACTICE" in os.environ:
+                    line = f"\x1b[1;31m\x1b[3m{line}\x1b[0m"
+                else:
+                    continue
             elif line.strip().startswith("!import "):
                 exec(line.strip("! \n"), globals())
                 continue
