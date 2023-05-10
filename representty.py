@@ -42,6 +42,7 @@ class Presentation:
         print("\r")
         slide = self.slides[self.slide_no]
         lines = []
+        set_local, unset_local = set(), set()
         for line in slide.split("\n"):
             if line.strip().startswith("!!"):
                 if self.slide_no not in self.slides_shown:
@@ -56,9 +57,14 @@ class Presentation:
                 exec(line.strip("! \n"), globals())
                 continue
             elif line.strip().startswith("!unset"):
-                self.flags -= line.strip().split()[1]
+                flag = line.strip().split()[1]
+                self.flags -= flag
+                if line.strip().startswith("!unsetlocal"):
+                    unset_local.add(flag)
             elif line.strip().startswith("!set"):
                 self.flags |= line.strip().split()[1]
+                if line.strip().startswith("!setlocal"):
+                    set_local.add(flag)
             lines.append(line)
         markdown = Markdown("\n".join(lines).strip())
         for token in markdown.parsed:
@@ -72,6 +78,8 @@ class Presentation:
         self.console.print(markdown)
         self.draw_slide_number()
         self.slides_shown.add(self.slide_no)
+        self.flags |= unset_local
+        self.flags -= set_local
         return ""
 
     def draw_slide_number(self):
