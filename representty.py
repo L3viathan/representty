@@ -15,12 +15,17 @@ class ShowTheSlide:
     def __repr__(self):
         if self.fn(self.presentation) is not False:
             return repr(self.presentation)
+        return ""
 
 
 class Presentation:
     def __init__(self, filename):
         with open(filename) as file:
             self.slides = re.split(r"====+", file.read())
+        self.index = {}
+        for i, slide in enumerate(self.slides):
+            for word in slide.split():
+                self.index[word.lower()] = i
         self._slide_no = 0
         self.console = Console()
         self.slides_shown = set()
@@ -115,6 +120,19 @@ def p(presentation):
 def g(presentation):
     print("\x1b[1Ago to slide: ", end="", flush=True)
     presentation.slide_no = int(input())
+
+
+@PRES.bind
+def s(presentation):
+    print("\x1b[1Asearch: ", end="", flush=True)
+    query = input().lower()
+    for word, slide_no in presentation.index.items():
+        if query in word:
+            presentation.slide_no = slide_no
+            break
+    else:
+        print("[not found]")
+        return False
 
 
 @PRES.bind
