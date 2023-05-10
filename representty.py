@@ -24,6 +24,7 @@ class Presentation:
         self._slide_no = 0
         self.console = Console()
         self.slides_shown = set()
+        self.flags = {"exec"}
 
     @property
     def slide_no(self):
@@ -54,10 +55,18 @@ class Presentation:
             elif line.strip().startswith("!import "):
                 exec(line.strip("! \n"), globals())
                 continue
+            elif line.strip().startswith("!unset"):
+                self.flags -= line.strip().split()[1]
+            elif line.strip().startswith("!set"):
+                self.flags |= line.strip().split()[1]
             lines.append(line)
         markdown = Markdown("\n".join(lines).strip())
         for token in markdown.parsed:
-            if token.tag == "code" and token.info.startswith("py"):
+            if (
+                token.tag == "code"
+                and token.info.startswith("py")
+                and "exec" in self.flags
+            ):
                 exec(token.content, globals())
 
         self.console.print(markdown)
