@@ -45,7 +45,10 @@ class Presentation:
         set_local, unset_local = set(), set()
         for line in slide.split("\n"):
             if line.strip().startswith("!!"):
-                if self.slide_no not in self.slides_shown:
+                if (
+                    "alwaysexec" in self.flags
+                    or self.slide_no not in self.slides_shown
+                ):
                     os.system(line.strip()[2:])
                 continue
             elif line.strip().startswith("//"):
