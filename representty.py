@@ -61,11 +61,13 @@ class Presentation:
                 self.flags -= {flag}
                 if line.strip().startswith("!unsetlocal"):
                     unset_local.add(flag)
+                continue
             elif line.strip().startswith("!set"):
                 flag = line.strip().split()[1]
                 self.flags |= {flag}
                 if line.strip().startswith("!setlocal"):
                     set_local.add(flag)
+                continue
             lines.append(line)
         markdown = Markdown("\n".join(lines).strip())
         for token in markdown.parsed:
