@@ -58,11 +58,12 @@ class Presentation:
                 continue
             elif line.strip().startswith("!unset"):
                 flag = line.strip().split()[1]
-                self.flags -= flag
+                self.flags -= {flag}
                 if line.strip().startswith("!unsetlocal"):
                     unset_local.add(flag)
             elif line.strip().startswith("!set"):
-                self.flags |= line.strip().split()[1]
+                flag = line.strip().split()[1]
+                self.flags |= {flag}
                 if line.strip().startswith("!setlocal"):
                     set_local.add(flag)
             lines.append(line)
