@@ -22,6 +22,13 @@ Additionally, you can start a line with:
       `representty` behaviour. See [flags](#flags).
     - `!setlocal flag`/`!unsetlocal flag`: (un)set a flag, but reset to
       original value at the end of the slide.
+    - `!image someimage`: Display an image. This only works if you have
+      `viu` installed.
+    - `!up some_int`: Move the cursor up by some amount. Useful for drawing
+      over images.
+    - `!printf something`: Call `printf` with the given args. Better than
+      plain `!!printf`, because it will be executed every time the slide is
+      displayed by default.
 
 Python code blocks (language starts with `py`) are not just rendered, but also
 executed.
