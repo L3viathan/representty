@@ -4,6 +4,8 @@
 Markdown, `rich` renders individual slides, and the whole thing happens in an
 IPython shell.
 
+[![asciicast](https://asciinema.org/a/584388.svg)](https://asciinema.org/a/584388)
+
 ## File Format
 
 A slide deck is mostly a Markdown file. Individual slides are seperated by a
