@@ -64,6 +64,17 @@ class Presentation:
             elif line.strip().startswith("!import "):
                 exec(line.strip("! \n"), globals())
                 continue
+            elif line.strip().startswith("!image "):
+                os.system(f"viu -t {line.removeprefix('!image ').strip()}")
+                continue
+            elif line.strip().startswith("!printf "):
+                # to work without needing alwaysexec
+                os.system(line.strip().lstrip("!"))
+                continue
+            elif line.strip().startswith("!up "):
+                how_much = int(line.removeprefix("!up "))
+                os.system(f"printf '\e[{how_much}A'")
+                continue
             elif line.strip().startswith("!unset"):
                 flag = line.strip().split()[1]
                 self.flags -= {flag}
