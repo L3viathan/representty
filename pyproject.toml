@@ -4,6 +4,20 @@ version = "0.1.2"
 description = "Tiny presentation tool based on rich and markdown"
 authors = ["L3viathan <git@l3vi.de>"]
 license = "MIT"
+readme = "README.md"
+repository = "https://github.com/L3viathan/representty"
+keywords = ["presentation"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Framework :: IPython",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Education",
+    "Topic :: Multimedia :: Graphics :: Presentation",
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
