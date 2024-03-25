@@ -20,7 +20,7 @@ class ShowTheSlide:
 
 class Presentation:
     def __init__(self, filename):
-        with open(filename) as file:
+        with open(filename, encoding="utf8") as file:
             self.slides = re.split(r"====+", file.read())
         self.index = {}
         for i, slide in enumerate(self.slides):
